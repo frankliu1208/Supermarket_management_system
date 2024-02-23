@@ -3,9 +3,14 @@ using System.Net.Mime;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllersWithViews();
+
 var app = builder.Build();
 
 //app.MapGet("/", (HttpContext context) => "Hello World!");
+
+app.UseStaticFiles();
 
 app.UseRouting();
 
