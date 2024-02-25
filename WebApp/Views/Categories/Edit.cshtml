@@ -1,5 +1,8 @@
-﻿﻿
+﻿@* This line specifies that the model for this view is a single Category object.﻿ *@
 @model Category
+
+
+
 
 @section title {
     @if (Model != null)
@@ -8,6 +11,7 @@
     }
 }
 
+@* If a category object is present in the model, it displays a form for editing the category details. *@
 @if (Model != null)
 {
     <form method="post" asp-controller="categories" asp-action="edit">

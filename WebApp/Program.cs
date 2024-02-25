@@ -22,9 +22,3 @@ app.MapControllerRoute(
 app.Run();
 
 
-//void WriteHtml(HttpContext context,  string html)
-//{
-//    context.Response.ContentType = MediaTypeNames.Text.Html;
-//    context.Response.ContentLength = Encoding.UTF8.GetByteCount(html);
-//    context.Response.WriteAsync(html);
-//}

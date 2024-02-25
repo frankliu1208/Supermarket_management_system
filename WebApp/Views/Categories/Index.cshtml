@@ -1,13 +1,14 @@
-﻿﻿
+﻿@* below specifies that the model for this view is a list of Category objects﻿ *@
 @model List<Category>
 
-
+@* This section defines the title of the page *@
 @section title {
     <h3>
         Categories
     </h3>
 }
 
+@* checks if the model is not null and contains at least one category. If so, it displays the list of categories. *@
 @if (Model != null && Model.Count() > 0)
 {
     <table class="table table-striped">
@@ -35,8 +36,8 @@
     <a class="btn btn-primary" asp-controller="categories" asp-action="add">Add</a>
 }
 
-@section Scripts
-   {
+@* This section includes JavaScript code for the view. it defines a JavaScript function confirmDelete() that prompts the user for confirmation before deleting a category. *@
+@section Scripts  {
     <script>
         function confirmDelete(){
             return confirm("Are you sure you want to delete?")
