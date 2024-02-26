@@ -1,19 +1,19 @@
-﻿﻿
+﻿
+
 @model Category
 
-@* This section defines the title of the page. In this case, it displays "Add Category" as an <h3> *@
-@* heading. *@
-@section title
-{
-        <h3>Add Category</h3>
+@* defaulting to an empty string if ViewBag.Action is null. *@
+@{
+    string action = ViewBag.Action ?? string.Empty;
 }
 
+<form method="post" asp-controller="categories" asp-action="@action">
+    @if (action?.ToLower() == "edit")
+    {
+        <input type="hidden" asp-for="CategoryId" />
+    }
 
-<partial name="_Category" model="@Model" />
-
-@* 
-<form method="post" asp-controller="categories" asp-action="add">
-    <div class="tet-danger" asp-validation-summary="All"></div>
+    <div class="text-danger" asp-validation-summary="All"></div>
     <div class="row mb-3">
         <div class="col-2">
             <label asp-for="Name" class="col-form-label"></label>
@@ -25,6 +25,7 @@
             <span class="text-danger" asp-validation-for="Name"></span>
         </div>
     </div>
+
     <div class="row mb-3">
         <div class="col-2">
             <label asp-for="Description" class="col-form-label"></label>
@@ -33,12 +34,13 @@
             <input type="text" asp-for="Description" class="form-control" />
         </div>
     </div>
+
     <div class="row mb-3">
         <div class="col-2">
-            <input type="submit" class="btn btn-primary" value="Add" />
+            <input type="submit" class="btn btn-primary" value="Save" />
         </div>
         <div class="col-6">
         </div>
     </div>
+
 </form>
- *@

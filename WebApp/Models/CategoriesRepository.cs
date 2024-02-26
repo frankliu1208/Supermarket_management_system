@@ -4,7 +4,7 @@ using WebApp.Models;
 namespace WebApp.Models
 {
     // in-memory repository for managing categories
-    public static class CategoriesRespository
+    public static class CategoriesRepository
     {
         private static List<Category> _categories = new List<Category>()
         {

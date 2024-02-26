@@ -9,14 +9,16 @@ namespace WebApp.Controllers
         // displaying a list of categories
         public IActionResult Index()
         {
-            var categories = CategoriesRespository.GetCategories();
+            var categories = CategoriesRepository.GetCategories();
             return View(categories);
         }
 
         // editing a category
         public IActionResult Edit(int? id)
         {
-            var category = CategoriesRespository.GetCategoryById(id.HasValue ? id.Value : 0);
+            ViewBag.Action = "edit";
+
+            var category = CategoriesRepository.GetCategoryById(id.HasValue ? id.Value : 0);
 
             return View(category);
 
@@ -28,15 +30,18 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                CategoriesRespository.UpdateCategory(category.CategoryId, category);
+                CategoriesRepository.UpdateCategory(category.CategoryId, category);
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Action = "edit";
             return View(category);
         }
 
         // display a form for adding a new category
         public IActionResult Add()
         {
+            ViewBag.Action = "add";
+             
             return View();
         }
 
@@ -46,15 +51,17 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                CategoriesRespository.AddCategory(category);
+                CategoriesRepository.AddCategory(category);
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.Action = "add";
             return View(category);
         }
 
         public IActionResult Delete(int categoryId)
         {
-            CategoriesRespository.DeleteCategory(categoryId);
+            CategoriesRepository.DeleteCategory(categoryId);
             return RedirectToAction(nameof(Index));
         }
     }
