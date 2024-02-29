@@ -8,3 +8,5 @@ namespace WebApp.ViewModels
         public Product Product { get; set; } = new Product();
     }
 }
+
+

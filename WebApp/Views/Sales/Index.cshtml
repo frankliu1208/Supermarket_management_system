@@ -1,0 +1,59 @@
+﻿@model SalesViewModel
+
+
+@section title {
+    <div class="row">
+        <div class="col-7"><h3>Cashier's Console</h3></div>
+        <div class="col-2"><label for="cashier">Cashier Name:</label></div>
+        <div class="col-3">
+            @* Display Cashier's name here *@
+        </div>
+    </div>
+}
+
+
+<br />
+<div class="row">
+    <div class="col-4">
+        @* Category selection *@
+
+        <select asp-for="SelectedCategoryId" class="form-control">
+            <option>- Please Select -</option>
+            @if (Model.Categories != null && Model.Categories.Count() > 0)
+            {
+                @foreach (var cat in Model.Categories)
+                {
+                    <option value="@cat.CategoryId">@cat.Name</option>
+                }
+            }
+        </select>
+
+        <br />
+        <div id="productsPartial">
+            @* Product List *@
+        </div>
+        <br />
+        <div>
+            @* Product Details *@
+        </div>
+        @* Sales form *@
+    </div>
+    <div class="col">
+        @* List of transactions *@
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+     // sets up an event handler to trigger an action when the value of an element with the ID "SelectedCategoryId" changes.
+        $(function () {
+            // When the value of this element changes (i.e., when the user selects a different category), the function inside the handler will execute.
+            $("#SelectedCategoryId").on("change", function () {
+                // It requests the partial view "ProductsByCategoryPartial" from the "products" controller, passing the selected category ID as a parameter in the request data.
+                $("#productsPartial").load("/products/ProductsByCategoryPartial", { categoryId: $(this).val() });
+            })
+
+        });
+    </script>
+}
