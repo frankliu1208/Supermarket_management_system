@@ -1,4 +1,5 @@
-﻿using WebApp.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using WebApp.Models;
 
 namespace WebApp.ViewModels
 {
@@ -9,5 +10,12 @@ namespace WebApp.ViewModels
 
         // This collection will be populated with data retrieved from a database and then passed to the view for display.
         public IEnumerable<Category> Categories { get; set; } = new List<Category>();
+
+        public int SelectedProductId { get; set; }
+
+
+        [Display(Name ="Quantity")]
+        [Range(1,int.MaxValue)]
+        public int QuantityToSell { get; set; }
     }
 }
