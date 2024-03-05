@@ -1,6 +1,5 @@
 ﻿@model SalesViewModel
 
-
 @section title {
     <div class="row">
         <div class="col-7"><h3>Cashier's Console</h3></div>
@@ -11,12 +10,10 @@
     </div>
 }
 
-
 <br />
 <div class="row">
     <div class="col-4">
         @* Category selection *@
-
         <select asp-for="SelectedCategoryId" class="form-control">
             <option>- Please Select -</option>
             @if (Model.Categories != null && Model.Categories.Count() > 0)
@@ -27,13 +24,12 @@
                 }
             }
         </select>
-
         <br />
         <div id="productsPartial">
             @* Product List *@
         </div>
         <br />
-        <div>
+        <div id="productDetailPartial">
             @* Product Details *@
         </div>
         @* Sales form *@
@@ -43,16 +39,29 @@
     </div>
 </div>
 
-
 @section Scripts {
     <script>
-     // sets up an event handler to trigger an action when the value of an element with the ID "SelectedCategoryId" changes.
         $(function () {
-            // When the value of this element changes (i.e., when the user selects a different category), the function inside the handler will execute.
+
+            // Handle category selection
             $("#SelectedCategoryId").on("change", function () {
-                // It requests the partial view "ProductsByCategoryPartial" from the "products" controller, passing the selected category ID as a parameter in the request data.
                 $("#productsPartial").load("/products/ProductsByCategoryPartial", { categoryId: $(this).val() });
-            })
+                $("#productDetailPartial").html("");
+            });
+
+            $("#productsPartial").on('click', '.product-row', function () {
+
+                // Highlight the row selected
+                $('.product-row').removeClass('highlight');
+                $(this).addClass('highlight');
+
+                // Get the product ID from the "product-id" attribute of the clicked row
+                var productId = $(this).attr('product-id');
+
+                // Load the details of the product in a partial view
+                $("#productDetailPartial").load("/sales/SellProductPartial", { productId: productId });
+
+            });
 
         });
     </script>
