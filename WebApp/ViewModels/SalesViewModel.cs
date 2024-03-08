@@ -1,8 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using WebApp.Models;
+using WebApp.ViewModels.Validations;
 
 namespace WebApp.ViewModels
 {
+    // This model helps in passing data between the controller and the view, facilitating a clean separation of concerns
+    // in the MVC architecture.
     public class SalesViewModel
     {
         // used in the view to keep track of the category selected by the user.
@@ -16,6 +19,7 @@ namespace WebApp.ViewModels
 
         [Display(Name ="Quantity")]
         [Range(1,int.MaxValue)]
+        [SalesViewModel_EnsureProperQuantity]
         public int QuantityToSell { get; set; }
     }
 }

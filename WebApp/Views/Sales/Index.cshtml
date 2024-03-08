@@ -1,5 +1,6 @@
 ﻿@model SalesViewModel
 
+@* Defines a section named "title" which contains HTML markup for the title of the page *@
 @section title {
     <div class="row">
         <div class="col-7"><h3>Cashier's Console</h3></div>
@@ -27,11 +28,11 @@
         </select>
         <br />
         <div id="productsPartial">
-            @* Product List *@
+            @* Product List,  a partial view will be rendered here to display a list of products *@
         </div>
         <br />
         <div id="productDetailPartial">
-            @* Product Details *@
+            @* Product Details,   rendering a partial view to display details of the selected product *@
         </div>
         @* Sales form *@
         <form method="post" asp-controller="sales" asp-action="sell" id="formSale">
@@ -51,8 +52,13 @@
     </div>
 </div>
 
+
+@* Defines a section named "Scripts" which contains JavaScript code for client-side functionality. 
+This section typically includes script references and functions to handle events and interactions on the page. *@
+
 @section Scripts {
     <script>
+        // The code inside $(function () {...}) executes when the document is ready(i.e., when the DOM is fully loaded).
         $(function () {
 
             // Initialize the form
